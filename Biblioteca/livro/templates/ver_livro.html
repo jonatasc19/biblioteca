@@ -2,47 +2,80 @@
 
 {% block 'conteudo' %}
             <div class="container">
-              
+            
               <br>
-              
-              <p>
-                <label>Nome do livro:</label>
-                <input class="form-control" type="text" value="{{livro.nome}}"> 
-              </p>
-              <p>
-                <label>Autor</label>
-                <input style="width: 40%;" class="form-control" type="text" value="{{livro.autor}}"> 
-              </p>
+              <form action="#" method="POST">
+                {%csrf_token %}  
+                <p>
+                  <label>Nome do livro:</label>
+                  <input class="form-control" type="text" value="{{livro.nome}}"> 
+                </p>
+                <p>
+                  <label>Autor</label>
+                  <input style="width: 40%;" class="form-control" type="text" value="{{livro.autor}}"> 
+                </p>
 
-              <p>
-                <label>Co-Autor</label>
-                <input style="width: 40%;" class="form-control" type="text" value="{{livro.co_autor}}"> 
-              </p>
-              <p>
-                <label>Data:</label>
-                <input style="width: 40%;" class="form-control" type="text" value="{{livro.data_cadastro}}"> 
-              </p>
-              <label>Categoria</label>
-              <select name="categoria">
-                <option>Python</option>
-              </select>
-              <br>
-              <br>
-
-              <label>Emprestado &nbsp; &nbsp;</label>
-              {% if  livro.emprestado %}
-
-                <input style="transform: scale(2.0);" checked type="checkbox" name="emprestado">
-                   
-              {% else %}
-
-                <input style="transform: scale(2.0);" type="checkbox" name="emprestado">
+                <p>
+                  <label>Co-Autor</label>
+                  <input style="width: 40%;" class="form-control" type="text" value="{{livro.co_autor}}"> 
+                </p>
+                <p>
+                  <label>Data:</label>
+                  <input style="width: 40%;" class="form-control" type="text" value="{{livro.data_cadastro}}"> 
+                </p>
+                <label>Categoria</label>
+                <select style="width: 20%;"class="form-control" name="categoria">
+                  {% for i in categoria_livro %}
                     
-              {% endif %}
-              <br>
-              <br>
+                    {% if livro.categoria.nome == i.nome%}  
+                      <option selected>{{i}}</option>
+                    {% else %}
+                        <option>{{i}}</option>
+                    {% endif %}  
+                  {% endfor %} 
+                </select>
+                <br>
+                <br>
 
-              <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+                <label>Emprestado &nbsp; &nbsp;</label>
+                {% if  livro.emprestado %}
+
+                  <input style="transform: scale(2.0);" checked type="checkbox" name="emprestado">
+                    
+                {% else %}
+
+                  <input style="transform: scale(2.0);" type="checkbox" name="emprestado">
+                      
+                {% endif %}
+                <br>
+                <br>
+
+                <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+              </form>
+              <hr>
+              <h2>Histórico de empréstimos</h2> 
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data Empréstimo</th>
+                    <th scope="col">Data Devolução</th>
+                    <th scope="col">Tempo Duração</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in emprestimos%}
+                    <tr>
+                      <th scope="row">{{i.nome_emprestado}}</th>
+                      <td>{{i.data_emprestimo}}</td>
+                      <td>{{i.data_devolucao}}</td>
+
+                      <td>@mdo</td>
+                    </tr>
+                  {%endfor%}
+                  
+                </tbody>
+              </table> 
 
             </div>
 {% endblock 'conteudo' %}
