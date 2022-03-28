@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load filtros %} #carregando filtro para fazer calculo do tempo de duracao
 {% block 'conteudo' %}
             <div class="container">
             
@@ -69,8 +69,7 @@
                       <th scope="row">{{i.nome_emprestado}}</th>
                       <td>{{i.data_emprestimo}}</td>
                       <td>{{i.data_devolucao}}</td>
-
-                      <td>@mdo</td>
+                      <td>{{ i.data_devolucao|mostra_duracao:i.data_emprestimo}}-dias</td>
                     </tr>
                   {%endfor%}
                   

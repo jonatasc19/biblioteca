@@ -14,14 +14,39 @@
   <body>
 
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href= {% url 'home' %}>Navbar</a>
+        <a class="navbar-brand" href= "{% url 'home' %}">Home</a>
+        {% if usuario_logado %}
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cadastrar novo livro</button>
+          <a href="{% url 'sair' %}" class="btn btn-danger">Sair</a>
+        {% endif %}
       </nav>
 
     {% block 'conteudo' %}{% endblock  %}
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
-
- 
+   
+      {% if usuario_logado %}
+      <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Cadastrar Livro</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+      {% endif %}
   </body>
 </html>
