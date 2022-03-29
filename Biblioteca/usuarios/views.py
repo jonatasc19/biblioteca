@@ -5,13 +5,13 @@ from django.shortcuts import redirect
 from hashlib import sha256
 
 def login(request):
-    if request.sessions.get('usuario'):
+    if request.session.get('usuario'):
         return redirect('/livro/home/')
     status = request.GET.get('status')
     return render(request, 'login.html', {'status': status  })
 
 def cadastro(request):
-    if request.sessions.get('usuario'):
+    if request.session.get('usuario'):
         return redirect('/livro/home/')
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
